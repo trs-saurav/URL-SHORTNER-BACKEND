@@ -14,6 +14,7 @@ connectDB('mongodb://localhost:27017/short-url')
 
 
 app.use(cors())
+
 app.use(express.json())
 app.use(express.urlencoded())
 app.use(cookieParser())
@@ -46,6 +47,10 @@ app.get("/:shortID", async (req, res) => {
         return res.status(500).send("Internal server error.");
     }
 });
+
+
+
+
 
 
 

@@ -23,7 +23,7 @@ async function handleGetAnalytics(req, res) {
 
         const shortId = req.params.shortId; 
 
-        const result = await URL.findOne({ shortId }); // Ensure you use 'result' here for database lookup
+        const result = await URL.findOne({ shortId }); 
 
         if (!result) {
             return res.status(404).json({ error: "Short URL not found" });
@@ -31,13 +31,21 @@ async function handleGetAnalytics(req, res) {
 
         return res.json({
             totalClicks: result.visitHistory.length,
-            analytics: result.visitHistory, // Correct capitalization
+            analytics: result.visitHistory, 
         });
    
     }
 
+    async function  getAllData(req, res){
+        try {
+          const data = await URL.find(); // Fetch all documents
+          res.status(200).json(data);
+        } catch (error) {
+          res.status(500).json({ message: 'Error fetching data', error });
+        }
+    }
 
 
 module.exports = {
-    handleGenerateNewShortURL, handleGetAnalytics
+    handleGenerateNewShortURL, handleGetAnalytics , getAllData
 }
