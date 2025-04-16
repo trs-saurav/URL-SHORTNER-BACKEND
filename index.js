@@ -4,13 +4,16 @@ const {connectDB} = require("./connect")
 const URL = require('./models/url')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
+require('dotenv').config()
+
 
 const app = express();
-const PORT = 8001;
+const PORT = process.env.PORT || 8001;
 
 
-connectDB('mongodb://localhost:27017/short-url')
+connectDB(process.env.MONGODB)
 .then(()=> console.log("DB connected"))
+.catch((err) => console.log(err))
 
 
 app.use(cors())
@@ -54,4 +57,4 @@ app.get("/:shortID", async (req, res) => {
 
 
 
-app.listen(PORT, ()=> console.log('server is listening'))
+app.listen(PORT, ()=> console.log('server is listening' , PORT))
