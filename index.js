@@ -6,6 +6,7 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser')
 require('dotenv').config()
 
+const userRoute = require('./routes/user')
 
 const app = express();
 const PORT = process.env.PORT || 8001;
@@ -23,6 +24,7 @@ app.use(express.urlencoded())
 app.use(cookieParser())
 
 app.use("/api/url" , urlRoute)
+app.use("/api/user", userRoute)
 
 app.get("/:shortID", async (req, res) => {
     try {
