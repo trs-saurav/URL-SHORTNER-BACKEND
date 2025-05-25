@@ -5,6 +5,7 @@ const URL = require('./models/url')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 require('dotenv').config()
+const cron = require("node-cron")
 
 const userRoute = require('./routes/user')
 
@@ -22,6 +23,12 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded())
 app.use(cookieParser())
+
+cron.schedule("*/10 * * * *", () => {
+    console.log("Running a scheduled task every minute");
+   
+});
+
 
 app.use("/api/url" , urlRoute)
 app.use("/api/user", userRoute)
