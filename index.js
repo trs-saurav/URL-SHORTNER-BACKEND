@@ -24,14 +24,18 @@ app.use(express.json())
 app.use(express.urlencoded())
 app.use(cookieParser())
 
-cron.schedule("*/10 * * * *", () => {
-    console.log("Running a scheduled task every minute");
-   
+cron.schedule("*/10 * * * *", async () => {
+    console.log("Running task every 10 minutes");
+    await fetch("https://urldummy.onrender.com/ping");
 });
 
 
 app.use("/api/url" , urlRoute)
 app.use("/api/user", userRoute)
+
+app.get("/ping", (req, res) => {
+    res.status(200).send("Server is alive!");
+});
 
 app.get("/:shortID", async (req, res) => {
     try {
