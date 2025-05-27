@@ -21,12 +21,12 @@ connectDB(process.env.MONGODB)
 
 const allowedOrigins = [
     "http://localhost:5173",
-    "https://urldummy.onrender.com"
+    "https://urldummy.vercel.app"
 ];
 
 app.use(cors({
-    // origin: allowedOrigins,
-    // credentials: true 
+    origin: allowedOrigins,
+    credentials: true 
 }));
 
 app.use(express.json())
